@@ -35,12 +35,18 @@ class login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    
+    this.setState({
+      loading: true
+    });
+
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
     this.props.loginUser(userData, this.props.history);
   };
+
 
   handleChange = e => {
     this.setState({
@@ -129,7 +135,7 @@ login.propTypes = {
 
 const mapStateToProps = state => ({
   user: state.user,
-  ui: state.UI
+  UI: state.UI
 });
 
 const mapActionsToProps = {
