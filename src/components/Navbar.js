@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ToolTipButton from '../util/ToolTipButton';
+import PostScream from './PostScream';
 
 // Redux
 import { connect } from 'react-redux';
@@ -26,9 +27,7 @@ export class Navbar extends Component {
             {authenticated ?
               (
                 <>
-                  <ToolTipButton tip='Post a Scream'>
-                    <AddIcon />
-                  </ToolTipButton>
+                  <PostScream />
                   <Link to='/home'>
                     <ToolTipButton tip='Home'>
                       <HomeIcon />
