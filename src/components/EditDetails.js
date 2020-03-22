@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import ToolTipButton from '../util/ToolTipButton';
+
 
 // Redux
 import { connect } from 'react-redux';
@@ -53,11 +55,11 @@ class EditDetails extends Component {
     this.setState({ open: false })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { credentials } = this.props;
     this.mapUserDetailsToState(credentials);
   }
-  
+
 
   handleChange = e => {
     this.setState({
@@ -81,11 +83,9 @@ class EditDetails extends Component {
 
     return (
       <>
-        <Tooltip title='Edit details' placement='top'>
-          <IconButton onClick={this.handleOpen} className={classes.button}>
+        <ToolTipButton tip='Edit Details' onClick={this.handleOpen} btnClassName='classes.button'>
             <EditIcon color='primary' />
-          </IconButton>
-        </Tooltip>
+        </ToolTipButton>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
