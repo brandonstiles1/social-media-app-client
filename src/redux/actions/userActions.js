@@ -1,4 +1,4 @@
-import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER } from '../types';
+import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER, MARK_NOTIFICATIONS_READ } from '../types';
 import axios from 'axios';
 
 export const loginUser = (userData, history) => dispatch => {
@@ -75,6 +75,16 @@ export const editUserDetails = userDetails => dispatch => {
   axios.post('/user', userDetails)
     .then( ()=> {
       dispatch(getUserData());
+    })
+    .catch(error => console.log(error));
+}
+
+export const markNotificationsRead = notificationsIds => dispatch => {
+  axios.post('/notifications', notificationsIds)
+    .then(res => {
+      dispatch({
+        type: MARK_NOTIFICATIONS_READ
+      })
     })
     .catch(error => console.log(error));
 }
