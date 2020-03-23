@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ToolTipButton from '../util/ToolTipButton';
-import PostScream from './PostScream';
+import PostScream from './scream/PostScream';
 
 // Redux
 import { connect } from 'react-redux';
@@ -13,7 +13,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 
 // Icons
-import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
 import Notifications from '@material-ui/icons/Notifications';
 

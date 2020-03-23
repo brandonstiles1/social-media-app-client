@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import ToolTipButton from '../util/ToolTipButton';
+import ToolTipButton from '../../util/ToolTipButton';
 
 // MUI elements
 import Button from '@material-ui/core/Button';
@@ -12,30 +12,31 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 // Icons
-import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 
 // Redux
 import { connect } from 'react-redux';
-import { postScream } from '../redux/actions/dataActions';
+import { postScream, clearErrors } from '../../redux/actions/dataActions';
 import { TextField } from '@material-ui/core';
 
 const styles = theme => ({
   ...theme.spreadThis,
   submitButton: {
-    position: 'relative'
+    position: 'relative',
+    float: 'right',
+    marginTop: '10px',
+    marginBottom: '10px'
   },
   progressSpinner: {
-    position: 'absolute'
+    position: 'absolute',
   },
   closeButton: {
     position: 'absolute',
-    left: '90%',
-    top: '10%'
+    left: '92%',
+    top: '6vh'
   }
-
-})
+});
 
 class PostScream extends Component {
   state = {
@@ -51,7 +52,7 @@ class PostScream extends Component {
       });
     };
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ body: '' })
+      this.setState({ body: '', open: false, errors: {} }); 
     }
   }
 
@@ -60,6 +61,7 @@ class PostScream extends Component {
   }
 
   handleClose = () => {
+    this.props.clearErrors();
     this.setState({
       open: false,
       errors: {}
@@ -93,8 +95,8 @@ class PostScream extends Component {
           fullWidth
           maxWidth='sm'
         >
-          <ToolTipButton tip='Close' onClick={this.handleClose} className={classes.closeButton}>
-            <CloseIcon />
+          <ToolTipButton tip='Close' onClick={this.handleClose}>
+            <CloseIcon className={classes.closeButton} />
           </ToolTipButton>
           <DialogTitle>Post a new Scream</DialogTitle>
           <DialogContent>
@@ -137,7 +139,8 @@ const mapStateToProps = state => ({
 
 PostScream.propTypes = {
   postScream: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired
+  UI: PropTypes.object.isRequired,
+  clearErrors: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, { postScream })(withStyles(styles)(PostScream));
+export default connect(mapStateToProps, { postScream, clearErrors })(withStyles(styles)(PostScream));
