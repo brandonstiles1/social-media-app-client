@@ -25,6 +25,9 @@ import AuthRoute from './util/AuthRoute';
 
 const theme = createMuiTheme(themeFile);
 
+axios.defaults.baseUrl = 
+  'https://us-central1-social-media-app-e5895.cloudfunctions.net/api';
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
