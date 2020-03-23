@@ -17,6 +17,7 @@ import { logoutUser, getUserData } from './redux/actions/userActions';
 import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
+import user from './pages/user'
 
 //Components
 import Navbar from './components/Navbar';
@@ -54,6 +55,7 @@ function App() {
                   exact path='/signup' 
                   component={signup} 
                 />
+                <Route exact path='/users/:handle' component={user} />
               </Switch>
             </div>
           </Router>
