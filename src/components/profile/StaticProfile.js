@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import dayjs from 'dayjs';
@@ -13,10 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
-
-// Redux
-import { connect } from 'react-redux';
-import { getUserData } from '../../redux/actions/dataActions';
 
 const styles = theme => ( {
   ...theme.spreadThis
@@ -48,7 +44,7 @@ const StaticProfile = props => {
           { website && (
             <>
               <LinkIcon color='primary' />
-              <a href={ website } target='_blank' rel='noopener noreferer'>
+              <a href={ website } target='_blank' rel="noopener noreferrer">
                 { ' ' }{ website }
               </a>
               <hr />

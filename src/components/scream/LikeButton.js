@@ -32,7 +32,7 @@ export class LikeButton extends Component {
   };
 
   render () {
-    const authenticated = this.props.user;
+    const {authenticated} = this.props.user;
 
     const likeButton = !authenticated ? (
       <Link to='/login'>
@@ -49,18 +49,10 @@ export class LikeButton extends Component {
             <FavoriteBorder color='primary' />
           </ToolTipButton>
         );
+
     return likeButton;
   }
 }
-
-const mapStateToProps = state => ( {
-  user: state.user
-} );
-
-const mapActionsToProps = {
-  likeScream,
-  unlikeScream
-};
 
 LikeButton.propTypes = {
   user: PropTypes.object.isRequired,
@@ -69,4 +61,9 @@ LikeButton.propTypes = {
   unlikeScream: PropTypes.func.isRequired
 }
 
-export default connect( mapStateToProps, mapActionsToProps )( LikeButton )
+const mapStateToProps = state => ( {
+  user: state.user
+} );
+
+
+export default connect(mapStateToProps,{likeScream, unlikeScream})(LikeButton);

@@ -27,7 +27,7 @@ export class Navbar extends Component {
               (
                 <>
                   <PostScream />
-                  <Link to='/home'>
+                  <Link to='/'>
                     <ToolTipButton tip='Home'>
                       <HomeIcon />
                     </ToolTipButton>

@@ -25,20 +25,20 @@ const styles = {
   card: {
     position: 'relative',
     display: 'flex',
-    marginBottom: '20px',
+    marginBottom: 20
   },
   image: {
-    minWidth: '200px',
+    minWidth: 200
   },
   content: {
-    padding: '25px',
-    objectFit: 'cover',
+    padding: 25,
+    objectFit: 'cover'
   }
 };
 
 class Scream extends Component {
-  render() {
-    dayjs.extend(relativeTime);
+  render () {
+    dayjs.extend( relativeTime );
     const {
       classes,
       scream: {
@@ -56,45 +56,42 @@ class Scream extends Component {
       }
     } = this.props;
 
-    const deleteButton = 
+    const deleteButton =
       authenticated && userHandle === handle ? (
-      <DeleteScream screamId={screamId} />
-    ) : null
+        <DeleteScream screamId={ screamId } />
+      ) : null;
 
     return (
-      <Card className={classes.card}>
+      <Card className={ classes.card }>
         <CardMedia
-          image={userImage}
-          className={classes.image}
-          title="Profile Image" 
+          image={ userImage }
+          className={ classes.image }
+          title="Profile Image"
         />
-        <CardContent className={classes.content}>
+        <CardContent className={ classes.content }>
           <Typography
             variant='h5'
-            component={Link}
-            to={`/users/${userHandle}`}
+            component={ Link }
+            to={ `/users/${userHandle}` }
             color="primary"
           >
-            {userHandle}
+            { userHandle }
           </Typography>
-          <Typography variant='body2' color='textSecondary'> 
-            {dayjs(createdAt).fromNow()}
-           </Typography>
+          { deleteButton }
+          <Typography variant='body2' color='textSecondary'>
+            { dayjs( createdAt ).fromNow() }
+          </Typography>
 
-          <Typography variant='body1'>{body}</Typography>
-          
-          <LikeButton screamId={screamId} />
-          <span>{likeCount} Likes</span>
-          
+          <Typography variant='body1'>{ body }</Typography>
+
+          <LikeButton screamId={ screamId } />
+          <span>{ likeCount } Likes</span>
+
           <ToolTipButton tip='comments'>
             <ChatIcon color='primary' />
           </ToolTipButton>
-          
           <span>{ commentCount } Comments</span>
-          
-          {deleteButton}
-          
-          <ScreamDialog screamId={screamId} userHandle={userHandle} openDialog={this.props.openDialog} />
+          <ScreamDialog screamId={ screamId } userHandle={ userHandle } openDialog={ this.props.openDialog } />
         </CardContent>
       </Card>
     );
@@ -108,9 +105,9 @@ Scream.propTypes = {
   openDialog: PropTypes.bool
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => ( {
   user: state.user
-});
+} );
 
 
-export default connect(mapStateToProps)(withStyles(styles)(Scream));
+export default connect( mapStateToProps )( withStyles( styles )( Scream ) );

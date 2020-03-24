@@ -10,8 +10,8 @@ import {
 
 const initialState = {
   authenticated: false,
-  credentials: {},
   loading: false,
+  credentials: {},
   likes: [],
   notifications: []
 };
@@ -30,12 +30,12 @@ export default function (state = initialState, action) {
         authenticated: true,
         loading: false,
         ...action.payload
-      }
+      };
     case LOADING_USER:
       return {
         ...state,
         loading: true
-      }
+      };
     case LIKE_SCREAM:
       return {
         ...state,
@@ -46,16 +46,16 @@ export default function (state = initialState, action) {
             screamId: action.payload.screamId
           }
         ]
-      }
+      };
     case UNLIKE_SCREAM:
       return {
         ...state,
         likes: state.likes.filter(
           like => like.screamId !== action.payload.screamId
         )
-      }
+      };
     case MARK_NOTIFICATIONS_READ:
-      state.notifications.forEach(notification => notification.read = true);
+      state.notifications.forEach(notification => (notification.read = true));
       return {
         ...state
       };

@@ -22,7 +22,7 @@ const styles = {
     left: '90%',
     top: '10%'  
   }
-}
+};
 
 class DeleteScream extends Component {
   state = {
@@ -48,7 +48,11 @@ class DeleteScream extends Component {
 
     return (
       <>
-      <ToolTipButton tip='Delete Scream' onClick={this.handleOpen} btnClassName={classes.deleteButton}>
+      <ToolTipButton 
+        tip='Delete Scream' 
+        onClick={this.handleOpen} 
+        btnClassName={classes.deleteButton}
+      >
         <DeleteOutline color='secondary'/>
       </ToolTipButton>
       <Dialog
@@ -56,7 +60,7 @@ class DeleteScream extends Component {
         onClose={this.handleClose}
         fullWidth
         maxWidth='sm'
-        >
+      >
           <DialogTitle>
             Are you sure you want to delete this scream?
           </DialogTitle>
@@ -70,9 +74,7 @@ class DeleteScream extends Component {
           </DialogActions>
         </Dialog>
       </>
-        
-    
-    )
+    );
   }
 }
 
@@ -82,4 +84,7 @@ DeleteScream.propTypes = {
   screamId: PropTypes.string.isRequired
 }
 
-export default connect(null, { deleteScream })(withStyles(styles)(DeleteScream))
+export default connect(
+  null, 
+  { deleteScream }
+  )(withStyles(styles)(DeleteScream));

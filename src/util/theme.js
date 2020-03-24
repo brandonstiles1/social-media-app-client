@@ -69,7 +69,7 @@ export default {
     padding: 25
   },
   cover: {
-    minWidth: 200,
+    minwidth: 200,
     objectFit: 'cover'
   },
   handle: {

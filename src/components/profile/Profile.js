@@ -134,7 +134,7 @@ class Profile extends Component {
             {website && (
               <>
                 <LinkIcon color='primary' />
-                <a href={website} target='_blank' rel='noopener noreferer'>
+                <a href={website} target='_blank' rel="noopener noreferrer">
                   {' '}{website}
                 </a>
                 <hr />
