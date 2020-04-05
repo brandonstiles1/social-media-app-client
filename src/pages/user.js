@@ -24,16 +24,16 @@ class user extends Component {
     const handle = this.props.match.params.handle;
     const screamId = this.props.match.params.screamId;
 
-    if ( screamId ) this.setState( { screamIdParam: screamId } );
+    if (screamId) this.setState({ screamIdParam: screamId });
 
-    this.props.getUserData( handle );
-    axios.get( `/user/${handle}` )
-      .then( res => {
-        this.setState( {
+    this.props.getUserData(handle);
+    axios.get(`/user/${handle}`)
+      .then(res => {
+        this.setState({
           profile: res.data.user
-        } )
-      } )
-      .catch( error => console.log( error ) );
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   render () {
@@ -45,15 +45,15 @@ class user extends Component {
     ) : screams === null ? (
       <p>No screams from this user</p>
     ) : !screamIdParam ? (
-          screams.map( scream => <Scream key={ scream.screamId } scream={ scream } /> )
-        ) : (
-          screams.map(scream => {
-            if(scream.screamId !== screamIdParam)
-              return <Scream key={ scream.screamId } scream={ scream } /> 
-            else return <Scream key={ scream.screamId } scream={ scream } openDialog /> 
+      screams.map(scream => <Scream key={ scream.screamId } scream={ scream } />)
+    ) : (
+            screams.map(scream => {
+              if (scream.screamId !== screamIdParam)
+                return <Scream key={ scream.screamId } scream={ scream } />
+              else return <Scream key={ scream.screamId } scream={ scream } openDialog />
 
-          })
-        )
+            })
+          )
 
     return (
       <Grid container spacing={ 2 }>
@@ -79,9 +79,9 @@ user.propTypes = {
   data: PropTypes.object.isRequired
 }
 
-const mapStateToProps = state => ( {
+const mapStateToProps = state => ({
   data: state.data,
 
-} )
+})
 
-export default connect( mapStateToProps, { getUserData } )( user );
+export default connect(mapStateToProps, { getUserData })(user);

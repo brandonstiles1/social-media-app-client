@@ -15,27 +15,24 @@ const styles = theme => ({
 const ScreamSkeleton = props => {
   const { classes } = props;
 
-  const content = Array.from({ length: 5}).map((item, index) => (
-    <Card className={classes.card} key={index}>
-      <CardMedia className={classes.cover} img={noImg} />
-      <CardContent className={classes.cardContent}>
-        <div className={classes.handle}/>
-        <div className={classes.date}/>
-        <div className={classes.fullLine}/>
-        <div className={classes.fullLine}/>
-        <div className={classes.halfLine}/>
+  const content = Array.from({ length: 5 }).map((item, index) => (
+    <Card className={ classes.card } key={ index }>
+      <CardMedia className={ classes.cover } image={ noImg } />
+      <CardContent className={ classes.cardContent }>
+        <div className={ classes.handle } />
+        <div className={ classes.date } />
+        <div className={ classes.fullLine } />
+        <div className={ classes.fullLine } />
+        <div className={ classes.halfLine } />
       </CardContent>
     </Card>
   ))
 
-  return(
+  return (
     <>
-    {content}
+      { content }
     </>
   )
-    
-  
-
 }
 
 ScreamSkeleton.propTypes = {

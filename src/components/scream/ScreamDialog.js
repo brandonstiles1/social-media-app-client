@@ -62,8 +62,8 @@ export class ScreamDialog extends Component {
     newPath: ''
   };
 
-  componentDidMount(){
-    if (this.props.openDialog){
+  componentDidMount () {
+    if (this.props.openDialog) {
       this.handleOpen();
     }
   }
@@ -77,7 +77,7 @@ export class ScreamDialog extends Component {
     if (oldPath === newPath) oldPath = `/users/${userHandle}`;
 
     window.history.pushState(null, null, newPath);
-    
+
     this.setState({ open: true, oldPath, newPath });
     this.props.getScream(this.props.screamId);
   }
@@ -88,7 +88,7 @@ export class ScreamDialog extends Component {
     this.props.clearErrors();
   }
 
-  render() {
+  render () {
     const {
       classes,
       scream: {
@@ -107,71 +107,80 @@ export class ScreamDialog extends Component {
     } = this.props;
 
     const dialogMarkup = loading ? (
-      <div className={classes.spinnerDiv}>
-        <CircularProgress size={200} />
+      <div className={ classes.spinnerDiv }>
+        <CircularProgress size={ 200 } />
       </div>
     ) : (
-        <Grid container spacing={10}>
-          <Grid item sm={4}>
-            <img src={userImage} alt='Profile' className={classes.profileImage} />
+        <Grid container spacing={ 10 }>
+          <Grid item sm={ 4 }>
+            <img src={ userImage } alt='Profile' className={ classes.profileImage } />
           </Grid>
-          <Grid item sm={6}>
+          <Grid item sm={ 6 }>
             <Typography
-              component={Link}
+              component={ Link }
               color='primary'
               variant='h5'
-              to={`/users/${userHandle}`}
+              to={ `/users/${userHandle}` }
             >
-              @{userHandle}
+              @{ userHandle }
             </Typography>
-            <hr className={classes.invisibleSeparator} />
+            <hr className={ classes.invisibleSeparator } />
             <Typography
               variant='body2'
               color='textSecondary'
             >
-              {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
+              { dayjs(createdAt).format('h:mm a, MMMM DD YYYY') }
             </Typography>
-            <hr className={classes.invisibleSeparator} />
-            <Typography variant='body1'>{body}</Typography>
-            <LikeButton screamId={screamId} />
-            <span>{likeCount} Likes</span>
+            <hr className={ classes.invisibleSeparator } />
+            <Typography variant='body1'>{ body }</Typography>
+            <LikeButton screamId={ screamId } />
+            <span>{ likeCount } Likes</span>
             <ToolTipButton tip='comments'>
               <ChatIcon color='primary' />
             </ToolTipButton>
-            <span>{commentCount} Comments</span>
+            <span>{ commentCount } Comments</span>
           </Grid>
-          <hr className={classes.visibleSeparator} />
-          <CommentForm screamId={screamId} />
-          <Comments comments={comments} />
+          <hr className={ classes.visibleSeparator } />
+          <CommentForm screamId={ screamId } />
+          <Comments comments={ comments } />
         </Grid>
       )
 
     return (
       <>
-        <ToolTipButton onClick={this.handleOpen} tip='Expand Scream' btnClassName={classes.expandButton}>
+        <ToolTipButton onClick={ this.handleOpen } tip='Expand Scream' btnClassName={ classes.expandButton }>
           <UnfoldMore color='primary' />
         </ToolTipButton>
         <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={ this.state.open }
+          onClose={ this.handleClose }
           fullWidth
           maxWidth='sm'
         >
           <ToolTipButton
             tip='Close'
-            onClick={this.handleClose}
-            btnClassName={classes.closeButton}
+            onClick={ this.handleClose }
+            btnClassName={ classes.closeButton }
           >
             <CloseIcon />
           </ToolTipButton>
-          <DialogContent className={classes.dialogContent}>
-            {dialogMarkup}
+          <DialogContent className={ classes.dialogContent }>
+            { dialogMarkup }
           </DialogContent>
         </Dialog>
 
       </>
     )
   }
+}
+
+ScreamDialog.propTypes = {
+  clearErrors: PropTypes.func.isRequired,
+  getScream: PropTypes.func.isRequired,
+  screamId: PropTypes.string.isRequired,
+  userHandle: PropTypes.string.isRequired,
+  scream: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -184,14 +193,6 @@ const mapActionsToProps = {
   clearErrors
 };
 
-ScreamDialog.propTypes = {
-  clearErrors: PropTypes.func.isRequired,
-  getScream: PropTypes.func.isRequired,
-  screamId: PropTypes.string.isRequired,
-  userHandle: PropTypes.string.isRequired,
-  scream: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired,
-}
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(ScreamDialog))
 

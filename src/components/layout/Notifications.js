@@ -26,46 +26,50 @@ class Notifications extends Component {
   state = {
     anchorEl: null
   };
-  handleOpen = ( event ) => {
-    this.setState( { anchorEl: event.target } );
+
+  handleOpen = (event) => {
+    this.setState({ anchorEl: event.target });
   };
+
   handleClose = () => {
-    this.setState( { anchorEl: null } );
+    this.setState({ anchorEl: null });
   };
+
   onMenuOpened = () => {
     let unreadNotificationsIds = this.props.notifications
-      .filter( ( not ) => !not.read )
-      .map( ( not ) => not.notificationId );
-    this.props.markNotificationsRead( unreadNotificationsIds );
+      .filter((not) => !not.read)
+      .map((not) => not.notificationId);
+    this.props.markNotificationsRead(unreadNotificationsIds);
   };
+
   render () {
     const notifications = this.props.notifications;
     const anchorEl = this.state.anchorEl;
 
-    dayjs.extend( relativeTime );
+    dayjs.extend(relativeTime);
 
     let notificationsIcon;
-    if ( notifications && notifications.length > 0 ) {
-      notifications.filter( ( not ) => not.read === false ).length > 0
-        ? ( notificationsIcon = (
+    if (notifications && notifications.length > 0) {
+      notifications.filter((not) => not.read === false).length > 0
+        ? (notificationsIcon = (
           <Badge
             badgeContent={
-              notifications.filter( ( not ) => not.read === false ).length
+              notifications.filter((not) => not.read === false).length
             }
             color="secondary"
           >
             <NotificationsIcon />
           </Badge>
-        ) )
-        : ( notificationsIcon = <NotificationsIcon /> );
+        ))
+        : (notificationsIcon = <NotificationsIcon />);
     } else {
       notificationsIcon = <NotificationsIcon />;
     }
     let notificationsMarkup =
       notifications && notifications.length > 0 ? (
-        notifications.map( ( not ) => {
+        notifications.map((not) => {
           const verb = not.type === 'like' ? 'liked' : 'commented on';
-          const time = dayjs( not.createdAt ).fromNow();
+          const time = dayjs(not.createdAt).fromNow();
           const iconColor = not.read ? 'primary' : 'secondary';
           const icon =
             not.type === 'like' ? (
@@ -87,7 +91,7 @@ class Notifications extends Component {
               </Typography>
             </MenuItem>
           );
-        } )
+        })
       ) : (
           <MenuItem onClick={ this.handleClose }>
             You have no notifications yet
@@ -106,7 +110,7 @@ class Notifications extends Component {
         </Tooltip>
         <Menu
           anchorEl={ anchorEl }
-          open={ Boolean( anchorEl ) }
+          open={ Boolean(anchorEl) }
           onClose={ this.handleClose }
           onEntered={ this.onMenuOpened }
         >
@@ -115,15 +119,18 @@ class Notifications extends Component {
       </>
     );
   }
-}
-
-const mapStateToProps = state => ( {
-  notifications: state.user.notifications
-} )
+};
 
 Notifications.propTypes = {
   markNotificationsRead: PropTypes.func.isRequired,
   notifications: PropTypes.array.isRequired
-}
+};
 
-export default connect( mapStateToProps, { markNotificationsRead } )( Notifications )
+const mapStateToProps = (state) => ({
+  notifications: state.user.notifications
+});
+
+export default connect(
+  mapStateToProps,
+  { markNotificationsRead }
+)(Notifications);

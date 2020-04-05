@@ -11,9 +11,9 @@ import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux'
 import { submitComment } from '../../redux/actions/dataActions';
 
-const styles = theme => ( {
+const styles = theme => ({
   ...theme.spreadThis,
-} )
+})
 
 class CommentForm extends Component {
   state = {
@@ -21,11 +21,11 @@ class CommentForm extends Component {
     errors: {}
   };
 
-  componentWillReceiveProps ( nextProps ) {
-    if ( nextProps.UI.errors ) {
-      this.setState( { errors: nextProps.UI.errors } )
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors })
     }
-    if (!nextProps.UI.errors && !nextProps.UI.loading){
+    if (!nextProps.UI.errors && !nextProps.UI.loading) {
       this.setState({
         body: ''
       })
@@ -33,14 +33,14 @@ class CommentForm extends Component {
   }
 
   handleChange = e => {
-    this.setState( {
+    this.setState({
       [e.target.name]: e.target.value
-    } );
+    });
   }
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.submitComment( this.props.screamId, { body: this.state.body } );
+    this.props.submitComment(this.props.screamId, { body: this.state.body });
   }
 
   render () {
@@ -53,7 +53,7 @@ class CommentForm extends Component {
           <TextField
             name='body'
             type='text'
-            Label='Comment on Scream'
+            label='Comment on Scream'
             error={ errors.comment ? true : false }
             helperText={ errors.comment }
             value={ this.state.body }
@@ -83,9 +83,9 @@ CommentForm.propTypes = {
   authenticated: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = state => ( {
+const mapStateToProps = state => ({
   UI: state.ui,
   authenticated: state.user.authenticated
-} )
+})
 
-export default connect( mapStateToProps, { submitComment } )( withStyles( styles )( CommentForm ) );
+export default connect(mapStateToProps, { submitComment })(withStyles(styles)(CommentForm));

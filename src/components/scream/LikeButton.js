@@ -24,15 +24,15 @@ export class LikeButton extends Component {
   };
 
   likeScream = () => {
-    this.props.likeScream( this.props.screamId )
+    this.props.likeScream(this.props.screamId)
   };
 
   unlikeScream = () => {
-    this.props.unlikeScream( this.props.screamId )
+    this.props.unlikeScream(this.props.screamId)
   };
 
   render () {
-    const {authenticated} = this.props.user;
+    const { authenticated } = this.props.user;
 
     const likeButton = !authenticated ? (
       <Link to='/login'>
@@ -61,9 +61,10 @@ LikeButton.propTypes = {
   unlikeScream: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ( {
+const mapStateToProps = state => ({
   user: state.user
-} );
+});
 
 
-export default connect(mapStateToProps,{likeScream, unlikeScream})(LikeButton);
+
+export default connect(mapStateToProps, { likeScream, unlikeScream })(LikeButton)
